@@ -7,7 +7,7 @@ var htmlMinify = require('html-minifier').minify;
 module.exports = function(options) {
     var opts = xtend({
         basepath: '',
-        pattern: /'@@import ([a-zA-Z0-9\-_.]+)'/g,
+        pattern: /'@@import ([a-zA-Z0-9\-_.\\/]+)'/g,
         debug: false
     }, options);
 
@@ -25,7 +25,8 @@ module.exports = function(options) {
                         filecontents = fs.readFileSync(fp, {encoding: 'utf8'});
                         filecontents = htmlMinify(filecontents, {
                             removeComments: true,
-                            collapseWhitespace: true
+                            collapseWhitespace: true,
+                            keepClosingSlash: true
                         });
                     } catch(e) {}
                     if(opts.debug) {
