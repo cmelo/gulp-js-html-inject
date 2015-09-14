@@ -1,6 +1,6 @@
 {
   "name": "gulp-js-html-inject-tmp",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Gulp plugin for injecting referenced HTML files back into JS code as strings",
   "main": "index.js",
   "scripts": {
