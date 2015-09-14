@@ -3,6 +3,7 @@ var path = require('path');
 var through = require('through2');
 var xtend = require('xtend');
 var htmlMinify = require('html-minifier').minify;
+var removeNewline = require('newline-remove');
 
 module.exports = function(options) {
     var opts = xtend({
@@ -23,11 +24,7 @@ module.exports = function(options) {
                     var filecontents = '';
                     try {
                         filecontents = fs.readFileSync(fp, {encoding: 'utf8'});
-                        filecontents = htmlMinify(filecontents, {
-                            removeComments: true,
-                            collapseWhitespace: true,
-                            keepClosingSlash: true
-                        });
+                        filecontents = removeNewline(filecontents);
                     } catch(e) {}
                     if(opts.debug) {
                         var status = (filecontents == '' ? 'not found' : 'OK');
