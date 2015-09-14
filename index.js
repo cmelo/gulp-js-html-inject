@@ -24,8 +24,7 @@ module.exports = function(options) {
                     var filecontents = '';
                     try {
                         filecontents = fs.readFileSync(fp, {encoding: 'utf8'});
-                        //filecontents = removeNewline(filecontents);
-                        filecontents = filecontents.replace(/\\n/g, '\\');
+                        filecontents = removeNewline(filecontents);
                     } catch(e) {}
                     if(opts.debug) {
                         var status = (filecontents == '' ? 'not found' : 'OK');
