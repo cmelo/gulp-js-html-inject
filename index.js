@@ -9,6 +9,7 @@ module.exports = function(options) {
     var opts = xtend({
         basepath: '',
         pattern: /'@@import ([a-zA-Z0-9\-_.\\/]+)'/g,
+        relativePath: false,
         debug: false
     }, options);
 
@@ -20,7 +21,8 @@ module.exports = function(options) {
 
             var process = function(contents) {
                 return contents.replace(opts.pattern, function(match, filepath) {
-                    var fp = path.join(opts.basepath, filepath);
+                    var dir = file.path.match('^(.+)/([^/]+)$')[1];
+                    var fp = path.join(opts.relativePath ? dir : opts.basepath, filepath);
                     var filecontents = '';
                     try {
                         filecontents = fs.readFileSync(fp, {encoding: 'utf8'});
