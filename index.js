@@ -21,7 +21,7 @@ module.exports = function(options) {
 
             var process = function(contents) {
                 return contents.replace(opts.pattern, function(match, filepath) {
-                    var dir = file.path.match('^(.+)/([^/]+)$')[1];
+                    var dir = file.path.match(/(\w)*?(.+)(\/|\\)/)[0];
                     var fp = path.join(opts.relativePath ? dir : opts.basepath, filepath);
                     var filecontents = '';
                     try {
